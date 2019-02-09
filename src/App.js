@@ -20,20 +20,25 @@ const list = [
   }
 ];
 
+const listService = {
+  getNumItems(list) {
+    return list.length;
+  }
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      list: list,
-      num_items: list.length
+      list
     };
   }
 
   render() {
     return (
       <div className="App">
-        <div># Items: {this.state.num_items}</div>
+        <div># Items: {listService.getNumItems(this.state.list)}</div>
         {this.state.list.map(item => (
           <div key={item.objectID}>
             <span>
