@@ -62,9 +62,32 @@ class App extends Component {
                 Dismiss
               </button>
             </span>
+            <span>
+              <ExplainBindingsComponent />
+            </span>
           </div>
         ))}
       </div>
+    );
+  }
+}
+
+class ExplainBindingsComponent extends Component {
+
+  constructor() {
+    super();
+    this.onClickMe = this.onClickMe.bind(this);
+  }
+
+  onClickMe() {
+    console.log(this);
+  }
+
+  render() {
+    return (
+      <button onClick={this.onClickMe} type="button">
+        Click Me
+      </button>
     );
   }
 }
