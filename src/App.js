@@ -73,12 +73,9 @@ class App extends Component {
 }
 
 class ExplainBindingsComponent extends Component {
-  constructor() {
-    super();
-    this.onClickMe = () => {
-      console.log(this);
-    };
-  }
+  onClickMe = () => {
+    console.log(this);
+  };
 
   render() {
     return (
