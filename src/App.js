@@ -56,7 +56,7 @@ class App extends Component {
             <span>{item.points}</span>
             <span>
               <button
-                onClick={() => this.onDismiss(item.objectID)}
+                onClick={this.onDismiss(item.objectID)}
                 type="button"
               >
                 Dismiss
