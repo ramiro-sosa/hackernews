@@ -11,10 +11,6 @@ const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}`;
 
 console.log(url);
 
-const listService = {
-  getNumItems: list => list.length
-};
-
 const isSearched = searchTerm => item =>
   item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
@@ -38,7 +34,6 @@ const smallColumn = { width: "10%" };
 
 const Table = ({ list, pattern, onDismiss }) => (
   <div className="table">
-    <div className="table-row"># Items: {listService.getNumItems(list)}</div>
     {list.filter(isSearched(pattern)).map(item => {
       return (
         <div key={item.objectID} className="table-row">
@@ -111,13 +106,13 @@ class App extends Component {
             Search
           </Search>
         </div>
-        {result ? (
+        {result && (
           <Table
             list={result.hits}
             pattern={searchTerm}
             onDismiss={this.onDismiss}
           />
-        ) : null}
+        )}
       </div>
     );
   }
