@@ -34,6 +34,7 @@ class App extends Component {
       list
     };
 
+    this.onSearchChange = this.onSearchChange.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
   }
 
@@ -42,11 +43,15 @@ class App extends Component {
     this.setState({ list: updatedList });
   }
 
+  onSearchChange() {
+    console.log("Call onSearchChange() function");
+  }
+
   render() {
     return (
       <div className="App">
         <form>
-          <input type="text"/>
+          <input type="text" onChange={this.onSearchChange} />
         </form>
         <div># Items: {listService.getNumItems(this.state.list)}</div>
         {this.state.list.map(item => {
@@ -59,7 +64,10 @@ class App extends Component {
               <span>{item.num_comments}</span>
               <span>{item.points}</span>
               <span>
-                <button onClick={() => console.log(item.objectID)} type="button">
+                <button
+                  onClick={() => console.log(item.objectID)}
+                  type="button"
+                >
                   Dismiss
                 </button>
               </span>
