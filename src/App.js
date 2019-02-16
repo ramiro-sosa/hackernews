@@ -45,6 +45,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <form>
+          <input type="text"/>
+        </form>
         <div># Items: {listService.getNumItems(this.state.list)}</div>
         {this.state.list.map(item => {
           return (
