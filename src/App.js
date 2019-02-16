@@ -31,7 +31,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      list
+      list,
+      searchText: '',
     };
 
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -43,8 +44,8 @@ class App extends Component {
     this.setState({ list: updatedList });
   }
 
-  onSearchChange() {
-    console.log("Call onSearchChange() function");
+  onSearchChange(event) {
+    this.setState({ searchText: event.target.value });
   }
 
   render() {
