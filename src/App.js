@@ -26,13 +26,19 @@ const listService = {
   }
 };
 
+function isSearched(searchTerm) {
+  return function(item) {
+    return item.title.toLowerCase().includes(searchTerm.toLowerCase());
+  };
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       list,
-      searchText: '',
+      searchTerm: ""
     };
 
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -45,7 +51,7 @@ class App extends Component {
   }
 
   onSearchChange(event) {
-    this.setState({ searchText: event.target.value });
+    this.setState({ searchTerm: event.target.value });
   }
 
   render() {
@@ -55,7 +61,7 @@ class App extends Component {
           <input type="text" onChange={this.onSearchChange} />
         </form>
         <div># Items: {listService.getNumItems(this.state.list)}</div>
-        {this.state.list.map(item => {
+        {this.state.list.filter(isSearched(this.state.searchTerm)).map(item => {
           return (
             <div key={item.objectID}>
               <span>
@@ -66,7 +72,7 @@ class App extends Component {
               <span>{item.points}</span>
               <span>
                 <button
-                  onClick={() => console.log(item.objectID)}
+                  onClick={() => this.onDismiss(item.objectID)}
                   type="button"
                 >
                   Dismiss
