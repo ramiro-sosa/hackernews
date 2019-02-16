@@ -52,13 +52,14 @@ class App extends Component {
   }
 
   render() {
+    const { searchTerm, list } = this.state;
     return (
       <div className="App">
         <form>
           <input type="text" onChange={this.onSearchChange} />
         </form>
-        <div># Items: {listService.getNumItems(this.state.list)}</div>
-        {this.state.list.filter(isSearched(this.state.searchTerm)).map(item => {
+        <div># Items: {listService.getNumItems(list)}</div>
+        {list.filter(isSearched(searchTerm)).map(item => {
           return (
             <div key={item.objectID}>
               <span>
