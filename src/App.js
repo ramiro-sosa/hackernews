@@ -33,6 +33,12 @@ const Search = ({ value, onChange, children }) => (
   </form>
 );
 
+const Button = ({ onClick, className = "", children }) => (
+  <button onClick={onClick} className={className} type="button">
+    {children}
+  </button>
+);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -64,17 +70,6 @@ class App extends Component {
         </Search>
         <Table list={list} pattern={searchTerm} onDismiss={this.onDismiss} />
       </div>
-    );
-  }
-}
-
-class Button extends Component {
-  render() {
-    const { onClick, className = "", children } = this.props;
-    return (
-      <button onClick={onClick} className={className} type="button">
-        {children}
-      </button>
     );
   }
 }
