@@ -39,6 +39,27 @@ const Button = ({ onClick, className = "", children }) => (
   </button>
 );
 
+const Table = ({ list, pattern, onDismiss }) => (
+  <div>
+    <div># Items: {listService.getNumItems(list)}</div>
+    {list.filter(isSearched(pattern)).map(item => {
+      return (
+        <div key={item.objectID}>
+          <span>
+            <a href={item.url}>{item.title}</a>
+          </span>
+          <span>{item.author}</span>
+          <span>{item.num_comments}</span>
+          <span>{item.points}</span>
+          <span>
+            <Button onClick={() => onDismiss(item.objectID)}>Dismiss</Button>
+          </span>
+        </div>
+      );
+    })}
+  </div>
+);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -69,34 +90,6 @@ class App extends Component {
           Search
         </Search>
         <Table list={list} pattern={searchTerm} onDismiss={this.onDismiss} />
-      </div>
-    );
-  }
-}
-
-class Table extends Component {
-  render() {
-    const { list, pattern, onDismiss } = this.props;
-    return (
-      <div>
-        <div># Items: {listService.getNumItems(list)}</div>
-        {list.filter(isSearched(pattern)).map(item => {
-          return (
-            <div key={item.objectID}>
-              <span>
-                <a href={item.url}>{item.title}</a>
-              </span>
-              <span>{item.author}</span>
-              <span>{item.num_comments}</span>
-              <span>{item.points}</span>
-              <span>
-                <Button onClick={() => onDismiss(item.objectID)}>
-                  Dismiss
-                </Button>
-              </span>
-            </div>
-          );
-        })}
       </div>
     );
   }
