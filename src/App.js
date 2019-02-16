@@ -29,13 +29,13 @@ const listService = {
 const isSearched = searchTerm => item =>
   item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
-function Search({ value, onChange, children }) {
+const Search = ({ value, onChange, children }) => {
   return (
     <form>
       {children} <input type="text" value={value} onChange={onChange} />
     </form>
   );
-}
+};
 
 class App extends Component {
   constructor(props) {
