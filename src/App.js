@@ -21,21 +21,17 @@ const list = [
 ];
 
 const listService = {
-  getNumItems(list) {
-    return list.length;
-  }
+  getNumItems: list => list.length
 };
 
 const isSearched = searchTerm => item =>
   item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
-const Search = ({ value, onChange, children }) => {
-  return (
-    <form>
-      {children} <input type="text" value={value} onChange={onChange} />
-    </form>
-  );
-};
+const Search = ({ value, onChange, children }) => (
+  <form>
+    {children} <input type="text" value={value} onChange={onChange} />
+  </form>
+);
 
 class App extends Component {
   constructor(props) {
