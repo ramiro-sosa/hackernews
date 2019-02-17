@@ -91,7 +91,10 @@ class App extends Component {
   }
 
   setSearchTopStories(result) {
-    this.setState({ result });
+    const { hits, page } = result;
+    const oldHits = page !== 0 ? this.state.result.hits : [];
+    const updatedHits = [...oldHits, ...hits];
+    this.setState({ result: { hits: updatedHits, page } });
   }
 
   fetcSearchTopStories(searchTerm, page = 0) {
@@ -126,7 +129,9 @@ class App extends Component {
         </div>
         {result && <Table list={result.hits} onDismiss={this.onDismiss} />}
         <div className="interactions">
-          <Button onClick={() => this.fetcSearchTopStories(searchTerm, page + 1)}>
+          <Button
+            onClick={() => this.fetcSearchTopStories(searchTerm, page + 1)}
+          >
             More
           </Button>
         </div>
