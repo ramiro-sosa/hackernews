@@ -6,8 +6,9 @@ const DEFAULT_QUERY = "redux";
 const PATH_BASE = "https://hn.algolia.com/api/v1";
 const PATH_SEARCH = "/search";
 const PARAM_SEARCH = "query=";
+const PARAM_PAGE = "page=";
 
-const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}`;
+const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}&${PARAM_PAGE}`;
 
 console.log(url);
 
@@ -16,7 +17,6 @@ const largeColumn = { width: "40%" };
 const midColumn = { width: "40%" };
 
 const smallColumn = { width: "10%" };
-
 
 const Search = ({ value, onChange, onSubmit, children }) => (
   <form onSubmit={onSubmit}>
@@ -94,8 +94,10 @@ class App extends Component {
     this.setState({ result });
   }
 
-  fetcSearchTopStories(searchTerm) {
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+  fetcSearchTopStories(searchTerm, page = 0) {
+    fetch(
+      `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}`
+    )
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
       .catch(error => error);
@@ -109,6 +111,7 @@ class App extends Component {
 
   render() {
     const { searchTerm, result } = this.state;
+    const page = (result && result.page) || 0;
 
     return (
       <div className="page">
@@ -121,12 +124,12 @@ class App extends Component {
             Search
           </Search>
         </div>
-        {result && (
-          <Table
-            list={result.hits}
-            onDismiss={this.onDismiss}
-          />
-        )}
+        {result && <Table list={result.hits} onDismiss={this.onDismiss} />}
+        <div className="interactions">
+          <Button onClick={() => this.fetcSearchTopStories(searchTerm, page + 1)}>
+            More
+          </Button>
+        </div>
       </div>
     );
   }
