@@ -63,7 +63,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      result: null,
+      results: null,
+      searchKey: "",
       searchTerm: DEFAULT_QUERY
     };
 
@@ -88,6 +89,7 @@ class App extends Component {
 
   onSearchSubmit(event) {
     const { searchTerm } = this.state;
+    this.setState({ searchKey: searchTerm });
     this.fetcSearchTopStories(searchTerm);
     event.preventDefault();
   }
@@ -110,7 +112,7 @@ class App extends Component {
 
   componentDidMount() {
     const { searchTerm } = this.state;
-
+    this.setState({ searchKey: searchTerm });
     this.fetcSearchTopStories(searchTerm);
   }
 
