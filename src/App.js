@@ -4,7 +4,7 @@ import "./App.css";
 const DEFAULT_QUERY = "redux";
 const DEFAULT_HPP = "100";
 
-const PATH_BASE = "https://hn.algolia.com/api/v1";
+const PATH_BASE = "https://hn.mydomain.com/api/v1";
 const PATH_SEARCH = "/search";
 const PARAM_SEARCH = "query=";
 const PARAM_PAGE = "page=";
@@ -65,7 +65,8 @@ class App extends Component {
     this.state = {
       results: null,
       searchKey: "",
-      searchTerm: DEFAULT_QUERY
+      searchTerm: DEFAULT_QUERY,
+      error: null
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
@@ -125,7 +126,7 @@ class App extends Component {
     )
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
-      .catch(error => error);
+      .catch(error => this.setState({ error }));
   }
 
   componentDidMount() {
@@ -135,11 +136,15 @@ class App extends Component {
   }
 
   render() {
-    const { searchTerm, results, searchKey } = this.state;
+    const { searchTerm, results, searchKey, error } = this.state;
     const page =
       (results && results[searchKey] && results[searchKey].page) || 0;
     const list =
       (results && results[searchKey] && results[searchKey].hits) || [];
+
+    if(error) {
+      return <p>Something went wrong.</p>
+    }
 
     return (
       <div className="page">
