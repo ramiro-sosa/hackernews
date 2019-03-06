@@ -74,7 +74,7 @@ describe("Table", () => {
 
   test('has a valid snapshot', () => {
     const component = renderer.create(
-      <Table {...props} />
+      <Table { ...props} />
     )
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
