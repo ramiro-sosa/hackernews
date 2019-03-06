@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App has a velid snapshot 1`] = `
+exports[`App has a valid snapshot 1`] = `
 <div
   className="page"
 >
@@ -41,7 +41,16 @@ exports[`App has a velid snapshot 1`] = `
 </div>
 `;
 
-exports[`Search has a velid snapshot 1`] = `
+exports[`Button has a valid snapshot 1`] = `
+<button
+  className=""
+  type="button"
+>
+  Give Me More
+</button>
+`;
+
+exports[`Search has a valid snapshot 1`] = `
 <form>
   Search
    
