@@ -40,3 +40,18 @@ exports[`App has a velid snapshot 1`] = `
   </div>
 </div>
 `;
+
+exports[`Search has a velid snapshot 1`] = `
+<form>
+  Search
+   
+  <input
+    type="text"
+  />
+  <button
+    type="submit"
+  >
+    Search
+  </button>
+</form>
+`;
