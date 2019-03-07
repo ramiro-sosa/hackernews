@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const DEFAULT_QUERY = "redux";
 const DEFAULT_HPP = "100";
@@ -33,6 +34,12 @@ const Button = ({ onClick, className = "", children }) => (
     {children}
   </button>
 );
+
+Button.propTypes = {
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+  children: PropTypes.node,
+}
 
 const Table = ({ list, onDismiss }) => (
   <div className="table">
