@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import axios from 'axios';
-import PropTypes from 'prop-types';
+import axios from "axios";
+import PropTypes from "prop-types";
 
 const DEFAULT_QUERY = "redux";
 const DEFAULT_HPP = "100";
@@ -22,12 +22,35 @@ const midColumn = { width: "40%" };
 
 const smallColumn = { width: "10%" };
 
-const Search = ({ value, onChange, onSubmit, children }) => (
-  <form onSubmit={onSubmit}>
-    {children} <input type="text" value={value} onChange={onChange} />
-    <button type="submit">{children}</button>
-  </form>
-);
+class Search extends Component {
+  componentDidMount() {
+    if (this.input) {
+      this.input.focus();
+    }
+  }
+  
+  render() {
+    const { 
+      value, 
+      onChange, 
+      onSubmit, 
+      children } = this.props;
+
+    return (
+      <form onSubmit={onSubmit}>
+        <input 
+          type="text" 
+          value={value} 
+          onChange={onChange}
+          ref={el => this.input = el}
+        />
+        <button type="submit">
+          {children}
+        </button>
+      </form>
+    );
+  }
+}
 
 const Button = ({ onClick, className, children }) => (
   <button onClick={onClick} className={className} type="button">
@@ -38,12 +61,12 @@ const Button = ({ onClick, className, children }) => (
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string,
-  children: PropTypes.node.isRequired,
-}
+  children: PropTypes.node.isRequired
+};
 
 Button.defaultProps = {
-  className: '',
-}
+  className: ""
+};
 
 const Table = ({ list, onDismiss }) => (
   <div className="table">
@@ -77,11 +100,11 @@ Table.propTypes = {
       author: PropTypes.string,
       url: PropTypes.string,
       num_comments: PropTypes.number,
-      points: PropTypes.number,
+      points: PropTypes.number
     })
   ).isRequired,
-  onDismiss: PropTypes.func.isRequired,
-}
+  onDismiss: PropTypes.func.isRequired
+};
 
 class App extends Component {
   _isMounted = false;
@@ -206,8 +229,4 @@ class App extends Component {
 
 export default App;
 
-export {
-  Button,
-  Search,
-  Table
-};
+export { Button, Search, Table };
