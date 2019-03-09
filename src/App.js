@@ -22,35 +22,26 @@ const midColumn = { width: "40%" };
 
 const smallColumn = { width: "10%" };
 
-class Search extends Component {
-  componentDidMount() {
-    if (this.input) {
-      this.input.focus();
-    }
-  }
-  
-  render() {
-    const { 
-      value, 
-      onChange, 
-      onSubmit, 
-      children } = this.props;
-
+const Search = ({ 
+  value, 
+  onChange, 
+  onSubmit, 
+  children }) => {
+    let input;
     return (
       <form onSubmit={onSubmit}>
         <input 
           type="text" 
           value={value} 
           onChange={onChange}
-          ref={el => this.input = el}
+          ref={el => input = el}
         />
         <button type="submit">
           {children}
         </button>
       </form>
     );
-  }
-}
+};
 
 const Button = ({ onClick, className, children }) => (
   <button onClick={onClick} className={className} type="button">
